@@ -1,18 +1,11 @@
-let backgroundImage;
-let playerImg;
-let towerImg;
-let moneyImg;
-let merchantImg;
-let houseImg; 
-let castleImg;
-let firstPlayer;
-let firstTower;
-let moneyIcon;
 let buildingsAdded = [];
 let canvasWidth = 1400;
 let canvasHeigth = 800;
 let lifeUpdate = 100;
 let numberOfConstructions = 0;
+let dialogueText = "";
+let dialogueVisible = false;
+let fontSize = 25;
 
 function preload() {
   backgroundImage = loadImage("./imgs/backgroundEmpty.png");
@@ -24,11 +17,15 @@ function preload() {
   tavernImg = loadImage("./imgs/tavernHeigth180.png");
   moneyImg = loadImage("./imgs/money.png");
   merchantImg = loadImage("./imgs/merchantHeigth150.png");
+  boatImg = loadImage("./imgs/boatHeigth200.png");
 }
 
 function setup() {
   firstPlayer = new Player(50, 50, playerImg);
-  firstMerchant = new Merchant(50, 400, merchantImg);
+  merchant = new Merchant(50, 400, merchantImg);
+  boat = new Boat(400, 450, boatImg);
+  //backgroundTest = loadImage("./imgs/backgroundEmpty.png");
+  //image(backgroundImage, 640, 442);
   moneyIcon = new Money(700, 400, moneyImg);
   createCanvas(canvasWidth, canvasHeigth);
 }
@@ -65,14 +62,21 @@ function draw() {
     firstPlayer.y < canvasHeigth
   ) {
     background(backgroundImage);
+    //image(backgroundImage, 640, 442);
   } else {
     background(backgroundImage2);
   }
   firstPlayer.update();
   firstPlayer.draw();
-  firstMerchant.draw();
+  merchant.draw();
+  boat.draw();
   for (let i = 0; i < buildingsAdded.length; i++) {
     buildingsAdded[i].draw();
+  }
+
+  if (dialogueVisible) {
+    textSize(fontSize); // Set the font size
+    text(dialogueText, canvasWidth / 2, canvasHeigth / 2);
   }
 }
 
@@ -88,3 +92,45 @@ setInterval(function () {
   const life = document.getElementById("life");
   life.innerHTML = `${lifeUpdate}`;
 }, 10000);
+
+function mouseMoved() {
+  // Check if the mouse is inside the image's boundaries
+  if (
+    mouseX >= merchant.x &&
+    mouseX <= merchant.x + merchantImg.width &&
+    mouseY >= merchant.y &&
+    mouseY <= merchant.y + merchantImg.height
+  ) {
+    // The mouse was clicked on the image
+    // You can add your code here to handle the image click event
+    //console.log("Image clicked!");
+    const dialogue = document.getElementById("dialogueMerchant");
+    dialogue.innerHTML = "Hola, Milburn, ¿cómo puedo ayudarte?";
+    dialogueText = "Hola, Milburn, ¿cómo puedo ayudarte?";
+    dialogueVisible = true;
+  } else if (
+    mouseX >= boat.x &&
+    mouseX <= boat.x + boatImg.width &&
+    mouseY >= boat.y &&
+    mouseY <= boat.y + boatImg.height
+  ) {
+    // The mouse was clicked on the image
+    // You can add your code here to handle the image click event
+    //console.log("Image clicked!");
+    dialogueText = "Haz clic para pescar";
+    dialogueVisible = true;
+  } else {
+    dialogueVisible = false;
+  }
+}
+
+function mousePressed() {
+  if (
+    mouseX >= boat.x &&
+    mouseX <= boat.x + boatImg.width &&
+    mouseY >= boat.y &&
+    mouseY <= boat.y + boatImg.height
+  ) {
+    console.log("Pesca");
+  }
+}
