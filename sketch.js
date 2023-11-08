@@ -1,5 +1,5 @@
 let buildingsAdded = [];
-let canvasWidth = 1100;
+let canvasWidth = 900;
 let canvasHeigth = 600;
 let lifeUpdate = 100;
 let numberOfConstructions = 0;
@@ -61,30 +61,57 @@ function draw() {
   for (let i = 0; i < buildingsAdded.length; i++) {
     buildingsAdded[i].draw();
   }
-
-  if (firstPlayer.x >= canvasWidth -100) {
-    backgroundTest.x -= 10; 
-    firstPlayer.x = canvasWidth - 100;
-    merchant.x -= 500;
-    for (let i = 0; i < buildingsAdded.length; i++) {
-      buildingsAdded[i].x -= 500;
+  //MOVIMIENTO POR LOS 4 LADOS//
+  if (firstPlayer.x >= canvasWidth - 200) {
+    firstPlayer.x = canvasWidth - 200;
+    if (
+      backgroundTest.x >= canvasWidth - backgroundImageTest.width &&
+      keyIsDown(RIGHT_ARROW)
+    ) {
+      backgroundTest.x -= 5;
+      merchant.x -= 5;
+      for (let i = 0; i < buildingsAdded.length; i++) {
+        buildingsAdded[i].x -= 5;
+      }
     }
-  } else if (firstPlayer.y > canvasHeigth) {
-    backgroundTest.y = -505;
-    firstPlayer.y = 50;
-    merchant.y = 10;
-    boat.x = 300;
-    boat.y = 300;
-  } else if (firstPlayer.x < 0 && backgroundTest.x !== 0) {
-    backgroundTest.x = 0;
-    firstPlayer.x = canvasWidth - 100;
-    merchant.x = 50;
-  } else if (firstPlayer.y < 0 && backgroundTest.y !== 0) {
-    backgroundTest.y = 0;
-    firstPlayer.y = canvasHeigth - 100;
-    merchant.x = 50;
-    merchant.y = 400;
   }
+
+  if (firstPlayer.x < 10) {
+    firstPlayer.x = 10;
+    if (backgroundTest.x < 0 && keyIsDown(LEFT_ARROW)) {
+      backgroundTest.x += 5;
+      merchant.x += 5;
+      for (let i = 0; i < buildingsAdded.length; i++) {
+        buildingsAdded[i].x += 5;
+      }
+    }
+  }
+
+  if (firstPlayer.y >= canvasHeigth - 200) {
+    firstPlayer.y = canvasHeigth - 200;
+    if (
+      backgroundTest.y >= canvasHeigth - backgroundImageTest.height &&
+      keyIsDown(DOWN_ARROW)
+    ) {
+      backgroundTest.y -= 5;
+      merchant.y -= 5;
+      for (let i = 0; i < buildingsAdded.length; i++) {
+        buildingsAdded[i].y -= 5;
+      }
+    }
+  }
+
+  if (firstPlayer.y < 10) {
+    firstPlayer.y = 10;
+    if (backgroundTest.y < 0 && keyIsDown(UP_ARROW)) {
+      backgroundTest.y += 5;
+      merchant.y += 5;
+      for (let i = 0; i < buildingsAdded.length; i++) {
+        buildingsAdded[i].y += 5;
+      }
+    }
+  }
+  //MOVIMIENTO POR LOS 4 LADOS//
 
   if (dialogueVisible) {
     textSize(fontSize); // Set the font size
