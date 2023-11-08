@@ -73,6 +73,8 @@ function draw() {
     backgroundTest.y = -505;
     firstPlayer.y = 50;
     merchant.y = 10;
+    boat.x = 200;
+    boat.y = 400;
   } else if (firstPlayer.x < 0 && backgroundTest.x !== 0) {
     backgroundTest.x = 0;
     firstPlayer.x = canvasWidth - 100;
@@ -81,6 +83,7 @@ function draw() {
     backgroundTest.y = 0;
     firstPlayer.y = canvasHeigth - 100;
     merchant.x = 50;
+    merchant.y = 400;
   }
 
   if (dialogueVisible) {
