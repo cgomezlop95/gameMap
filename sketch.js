@@ -62,9 +62,9 @@ function draw() {
     buildingsAdded[i].draw();
   }
 
-  if (firstPlayer.x > canvasWidth) {
-    backgroundTest.x = -500;
-    firstPlayer.x = 600;
+  if (firstPlayer.x >= canvasWidth -100) {
+    backgroundTest.x -= 10; 
+    firstPlayer.x = canvasWidth - 100;
     merchant.x -= 500;
     for (let i = 0; i < buildingsAdded.length; i++) {
       buildingsAdded[i].x -= 500;
@@ -73,8 +73,8 @@ function draw() {
     backgroundTest.y = -505;
     firstPlayer.y = 50;
     merchant.y = 10;
-    boat.x = 200;
-    boat.y = 400;
+    boat.x = 300;
+    boat.y = 300;
   } else if (firstPlayer.x < 0 && backgroundTest.x !== 0) {
     backgroundTest.x = 0;
     firstPlayer.x = canvasWidth - 100;
@@ -146,5 +146,3 @@ function mousePressed() {
     console.log("Pesca");
   }
 }
-
-//TEST 
