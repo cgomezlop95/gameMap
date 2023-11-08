@@ -1,25 +1,26 @@
 #main-console {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    justify-content: space-around;
-    width: 1400px;
-    font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: space-around;
+  width: 1400px;
+  font-size: 14px;
+  margin: 0px;
 }
 
 p {
-    border: 1px black solid; 
-    padding: 15px;
+  border: 1px black solid;
+  padding: 5px;
 }
 
 /* style.css */
 .dialog-console {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 400px; /* Adjust the width as needed */
-    height: 100%;
-    background-color: #f0f0f0;
-    overflow-y: auto; /* Add scrollbars if necessary */
-    padding: 10px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px; /* Adjust the width as needed */
+  height: 100%;
+  background-color: #f0f0f0;
+  overflow-y: auto; /* Add scrollbars if necessary */
+  padding: 10px;
 }

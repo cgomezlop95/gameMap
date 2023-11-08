@@ -1,6 +1,6 @@
 let buildingsAdded = [];
-let canvasWidth = 1400;
-let canvasHeigth = 800;
+let canvasWidth = 1100;
+let canvasHeigth = 600;
 let lifeUpdate = 100;
 let numberOfConstructions = 0;
 let dialogueText = "";
@@ -8,8 +8,7 @@ let dialogueVisible = false;
 let fontSize = 25;
 
 function preload() {
-  backgroundImage = loadImage("./imgs/backgroundEmpty.png");
-  backgroundImage2 = loadImage("./imgs/test2.png");
+  backgroundImageTest = loadImage("./imgs/backgroundTest1600.png");
   playerImg = loadImage("./imgs/playerHeigth150.png");
   towerImg = loadImage("./imgs/tower.png");
   houseImg = loadImage("./imgs/houseHeigth200.png");
@@ -23,9 +22,8 @@ function preload() {
 function setup() {
   firstPlayer = new Player(50, 50, playerImg);
   merchant = new Merchant(50, 400, merchantImg);
-  boat = new Boat(400, 450, boatImg);
-  //backgroundTest = loadImage("./imgs/backgroundEmpty.png");
-  //image(backgroundImage, 640, 442);
+  boat = new Boat(1400, 750, boatImg);
+  backgroundTest = new backgroundImage(0, 0, backgroundImageTest);
   moneyIcon = new Money(700, 400, moneyImg);
   createCanvas(canvasWidth, canvasHeigth);
 }
@@ -55,23 +53,34 @@ function buildBar() {
 }
 
 function draw() {
-  if (
-    firstPlayer.x > 0 &&
-    firstPlayer.x < canvasWidth &&
-    firstPlayer.y > 0 &&
-    firstPlayer.y < canvasHeigth
-  ) {
-    background(backgroundImage);
-    //image(backgroundImage, 640, 442);
-  } else {
-    background(backgroundImage2);
-  }
+  backgroundTest.draw();
   firstPlayer.update();
   firstPlayer.draw();
   merchant.draw();
   boat.draw();
   for (let i = 0; i < buildingsAdded.length; i++) {
     buildingsAdded[i].draw();
+  }
+
+  if (firstPlayer.x > canvasWidth) {
+    backgroundTest.x = -500;
+    firstPlayer.x = 600;
+    merchant.x -= 500;
+    for (let i = 0; i < buildingsAdded.length; i++) {
+      buildingsAdded[i].x -= 500;
+    }
+  } else if (firstPlayer.y > canvasHeigth) {
+    backgroundTest.y = -505;
+    firstPlayer.y = 50;
+    merchant.y = 10;
+  } else if (firstPlayer.x < 0 && backgroundTest.x !== 0) {
+    backgroundTest.x = 0;
+    firstPlayer.x = canvasWidth - 100;
+    merchant.x = 50;
+  } else if (firstPlayer.y < 0 && backgroundTest.y !== 0) {
+    backgroundTest.y = 0;
+    firstPlayer.y = canvasHeigth - 100;
+    merchant.x = 50;
   }
 
   if (dialogueVisible) {
