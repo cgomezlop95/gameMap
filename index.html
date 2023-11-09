@@ -7,42 +7,41 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
-    <script src="sketch.js"></script>
-    <script src="player.js"></script>
-    <script src="tower.js"></script>
-    <script src="money.js"></script>
-    <script src="merchant.js"></script>
-    <script src="house.js"></script>
-    <script src="castle.js"></script>
-    <script src="tavern.js"></script>
-    <script src="boat.js"></script>
-    <script src="backgroundImage.js"></script>
-    <div id="main-console">
-      <p>Name: <b>Milburn Pennybags</b></p>
-      <p>Hunger: <b id="hunger">100</b>%</p> 
-      <p>Hygiene: <b id="hygiene">100</b>%</p>
-      <p>Social: <b id="social">100</b>%</p>
-      <p>Dinero: <b id="money">$1000</b></p>
-      <p>Construcciones realizadas: <b id="constructions">0</b></p>
+    <div id="canvas">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+      <script src="sketch.js"></script>
+      <script src="player.js"></script>
+      <script src="classes/tower.js"></script>
+      <script src="classes/money.js"></script>
+      <script src="classes/merchant.js"></script>
+      <script src="classes/house.js"></script>
+      <script src="classes/castle.js"></script>
+      <script src="classes/tavern.js"></script>
+      <script src="classes/boat.js"></script>
+      <script src="backgroundImage.js"></script>
+      <script src="classes/market.js"></script>
+      <script src="classes/monastery.js"></script>
+      <script src="classes/ownHouse.js"></script>
+      <script src="classes/bank.js"></script>
+      <script src="mouse.js"></script>
     </div>
     <div class="dialog-console">
       <div>
-        <p>Bienvenido, Milburn</p>
-        <p>1. No salir del mapa</p>
-        <p>2. Comer/pescar</p>
-        <p>3. Hablar con el mercader</p>
-        <p>4. Construir 10 edificios</p>
+        <p>Welcome, Milburn, these are the keys to control your player</p>
         <ul>
-          <li>T - Torre</li>
-          <li>C - Castillo</li>
+          <li>T - Tower</li>
+          <li>C - Castle</li>
           <li>H - House</li>
           <li>B - Bar</li>
         </ul>
-        <p>Conversaciones<br><br><b id="dialogueMerchant"></b></p>
+      </div>
+      <div id="main-console">
+        <p>Name: <b>Milburn Pennybags</b></p>
+        <p>Hunger: <b id="hunger">100</b>%</p>
+        <p>Sleep: <b id="sleep">100</b>%</p>
+        <p>Social: <b id="social">100</b>%</p>
+        <p>Dinero: <b id="money">$1000</b></p>
       </div>
     </div>
-    <div id="canvas1"></div>
-    <div id="canvas2"></div>
   </body>
 </html>

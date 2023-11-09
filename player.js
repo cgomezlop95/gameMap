@@ -1,5 +1,5 @@
 const letterT = 84;
-const letterH = 72; 
+const letterH = 72;
 const letterC = 67;
 const letterB = 66;
 
@@ -28,31 +28,92 @@ class Player {
     }
 
     if (keyIsDown(letterT)) {
-      // 84 is the key code for the "T" key
       buildTower();
-      //moneyIcon.draw();
     }
 
     if (keyIsDown(letterH)) {
-      // 72 is the key code for the "H" key
       buildHouse();
-      //moneyIcon.draw();
     }
 
     if (keyIsDown(letterC)) {
-      // 67 is the key code for the "C" key
       buildCastle();
-      //moneyIcon.draw();
     }
 
     if (keyIsDown(letterB)) {
-      // 66 is the key code for the "B" key
       buildBar();
-      //moneyIcon.draw();
     }
   }
 
   draw() {
     image(this.playerImg, this.x, this.y);
   }
+}
+
+function buildTower() {
+  // Check if there's already a tower at the same position
+  for (let i = 0; i < buildingsAdded.length; i++) {
+    if (
+      buildingsAdded[i].x === firstPlayer.x - 110 &&
+      buildingsAdded[i].y === firstPlayer.y
+    ) {
+      console.log("A tower is already built at this position");
+      return;
+    }
+  }
+  // Build a new tower
+  const newTower = new Tower(firstPlayer.x - 110, firstPlayer.y, towerImg);
+  buildingsAdded.push(newTower);
+  // Reduce the money spent on construction
+  updateConstructions();
+}
+
+function buildHouse() {
+  for (let i = 0; i < buildingsAdded.length; i++) {
+    if (
+      buildingsAdded[i].x === firstPlayer.x - 110 &&
+      buildingsAdded[i].y === firstPlayer.y
+    ) {
+      console.log("A house is already built at this position");
+      return;
+    }
+  }
+  const newHouse = new House(firstPlayer.x - 110, firstPlayer.y, houseImg);
+  buildingsAdded.push(newHouse);
+  updateConstructions();
+}
+
+function buildCastle() {
+  for (let i = 0; i < buildingsAdded.length; i++) {
+    if (
+      buildingsAdded[i].x === firstPlayer.x - 110 &&
+      buildingsAdded[i].y === firstPlayer.y
+    ) {
+      console.log("A castle is already built at this position");
+      return;
+    }
+  }
+  const newCastle = new Castle(firstPlayer.x - 110, firstPlayer.y, castleImg);
+  buildingsAdded.push(newCastle);
+  updateConstructions();
+}
+
+function buildBar() {
+  for (let i = 0; i < buildingsAdded.length; i++) {
+    if (
+      buildingsAdded[i].x === firstPlayer.x - 220 &&
+      buildingsAdded[i].y === firstPlayer.y
+    ) {
+      console.log("A bar is already built at this position");
+      return;
+    }
+  }
+  const newBar = new Bar(firstPlayer.x - 220, firstPlayer.y, tavernImg);
+  buildingsAdded.push(newBar);
+  updateConstructions();
+}
+
+function updateConstructions() {
+  moneyUpdate -= 100;
+  const money = document.getElementById("money");
+  money.innerHTML = `${moneyUpdate}`;
 }

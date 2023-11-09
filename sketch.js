@@ -1,77 +1,69 @@
 let buildingsAdded = [];
-let canvasWidth = 1100; //Anterior: 900
-let canvasHeigth = 600;
-
+let canvasWidth = 1100;
+let canvasHeigth = 715;
 let hungerUpdate = 100;
-let hygieneUpdate = 100;
+let sleepUpdate = 100;
 let socialUpdate = 100;
-
+let moneyUpdate = 1000;
 let numberOfConstructions = 0;
 let dialogueText = "";
 let dialogueVisible = false;
 let fontSize = 25;
-
-//Game over functionality
 let gameOver = false;
 let restartButton;
 
 function preload() {
-  backgroundImageTest = loadImage("./imgs/backgroundTest1600.png");
+  backgroundImg = loadImage("./imgs/newTest-1600-1105.jpg");
   playerImg = loadImage("./imgs/playerHeigth150.png");
-  towerImg = loadImage("./imgs/tower.png");
+  towerImg = loadImage("./imgs/tower200.png");
   houseImg = loadImage("./imgs/houseHeigth200.png");
-  castleImg = loadImage("./imgs/castleHeigth150.png");
+  castleImg = loadImage("./imgs/medievalCastlecut.png");
   tavernImg = loadImage("./imgs/tavernHeigth180.png");
   moneyImg = loadImage("./imgs/money.png");
   merchantImg = loadImage("./imgs/merchantHeigth150.png");
+  monkImg = loadImage("./imgs/monk130.png");
   boatImg = loadImage("./imgs/boatHeigth200.png");
+  marketImg = loadImage("./imgs/market200.png");
+  monasteryImg = loadImage("./imgs/monastery200.png");
+  boat2Img = loadImage("./imgs/boat2-200.png");
+  ownHouseImg = loadImage("./imgs/myHouse.png");
+  bankImg = loadImage("./imgs/bank150.png");
 }
 
 function setup() {
   firstPlayer = new Player(50, 50, playerImg);
   merchant = new Merchant(50, 400, merchantImg);
+  monk = new Merchant(1100, 600, monkImg);
   boat = new Boat(400, 800, boatImg);
-  backgroundTest = new backgroundImage(0, 0, backgroundImageTest);
+  boat2 = new Boat(800, 700, boat2Img);
+  market = new Market(600, 350, marketImg);
+  monastery = new Monastery(1200, 600, monasteryImg);
+  myHouse = new ownHouse(420, 140, ownHouseImg);
+  bank = new Bank(910, 0, bankImg);
+  background = new backgroundImage(0, 0, backgroundImg);
   moneyIcon = new Money(700, 400, moneyImg);
-  createCanvas(canvasWidth, canvasHeigth);
-  //Game over functionality:
+  const gameContainer = select("#canvas");
+  canvas = createCanvas(canvasWidth, canvasHeigth);
+  canvas.parent(gameContainer);
   restartButton = createButton("Restart");
   restartButton.position(width / 2 - 50, height / 2);
   restartButton.hide();
   restartButton.mousePressed(startNewGame);
 }
 
-function buildTower() {
-  const newTower = new Tower(firstPlayer.x - 110, firstPlayer.y, towerImg);
-  buildingsAdded.push(newTower);
-  updateConstructions();
-}
-
-function buildHouse() {
-  const newHouse = new House(firstPlayer.x - 110, firstPlayer.y, houseImg);
-  buildingsAdded.push(newHouse);
-  updateConstructions();
-}
-
-function buildCastle() {
-  const newCastle = new Castle(firstPlayer.x - 110, firstPlayer.y, castleImg);
-  buildingsAdded.push(newCastle);
-  updateConstructions();
-}
-
-function buildBar() {
-  const newBar = new Bar(firstPlayer.x - 210, firstPlayer.y, tavernImg);
-  buildingsAdded.push(newBar);
-  updateConstructions();
-}
-
 function draw() {
-  backgroundTest.draw();
+  background.draw();
   if (!gameOver) {
     firstPlayer.update();
     firstPlayer.draw();
     merchant.draw();
+    monk.draw();
     boat.draw();
+    boat2.draw();
+    market.draw();
+    monastery.draw();
+    myHouse.draw();
+    bank.draw();
     for (let i = 0; i < buildingsAdded.length; i++) {
       buildingsAdded[i].draw();
     }
@@ -79,12 +71,18 @@ function draw() {
     if (firstPlayer.x >= canvasWidth - 200) {
       firstPlayer.x = canvasWidth - 200;
       if (
-        backgroundTest.x >= canvasWidth - backgroundImageTest.width &&
+        background.x >= canvasWidth - backgroundImg.width + 4 &&
         keyIsDown(RIGHT_ARROW)
       ) {
-        backgroundTest.x -= 5;
+        background.x -= 5;
         merchant.x -= 5;
+        monk.x -= 5;
         boat.x -= 5;
+        boat2.x -= 5;
+        market.x -= 5;
+        monastery.x -= 5;
+        myHouse.x -= 5;
+        bank.x -= 5;
         for (let i = 0; i < buildingsAdded.length; i++) {
           buildingsAdded[i].x -= 5;
         }
@@ -93,10 +91,16 @@ function draw() {
 
     if (firstPlayer.x < 10) {
       firstPlayer.x = 10;
-      if (backgroundTest.x < 0 && keyIsDown(LEFT_ARROW)) {
-        backgroundTest.x += 5;
+      if (background.x < 0 && keyIsDown(LEFT_ARROW)) {
+        background.x += 5;
         merchant.x += 5;
+        monk.x += 5;
         boat.x += 5;
+        boat2.x += 5;
+        market.x += 5;
+        monastery.x += 5;
+        myHouse.x += 5;
+        bank.x += 5;
         for (let i = 0; i < buildingsAdded.length; i++) {
           buildingsAdded[i].x += 5;
         }
@@ -106,12 +110,18 @@ function draw() {
     if (firstPlayer.y >= canvasHeigth - 200) {
       firstPlayer.y = canvasHeigth - 200;
       if (
-        backgroundTest.y >= canvasHeigth - backgroundImageTest.height &&
+        background.y >= canvasHeigth - backgroundImg.height &&
         keyIsDown(DOWN_ARROW)
       ) {
-        backgroundTest.y -= 5;
+        background.y -= 5;
         merchant.y -= 5;
+        monk.y -= 5;
         boat.y -= 5;
+        boat2.y -= 5;
+        market.y -= 5;
+        monastery.y -= 5;
+        myHouse.y -= 5;
+        bank.y -= 5;
         for (let i = 0; i < buildingsAdded.length; i++) {
           buildingsAdded[i].y -= 5;
         }
@@ -120,10 +130,16 @@ function draw() {
 
     if (firstPlayer.y < 10) {
       firstPlayer.y = 10;
-      if (backgroundTest.y < 0 && keyIsDown(UP_ARROW)) {
-        backgroundTest.y += 5;
+      if (background.y < 0 && keyIsDown(UP_ARROW)) {
+        background.y += 5;
         merchant.y += 5;
+        monk.y += 5;
         boat.y += 5;
+        boat2.y += 5;
+        market.y += 5;
+        monastery.y += 5;
+        myHouse.y += 5;
+        bank.y += 5;
         for (let i = 0; i < buildingsAdded.length; i++) {
           buildingsAdded[i].y += 5;
         }
@@ -132,15 +148,16 @@ function draw() {
     //MOVIMIENTO POR LOS 4 LADOS//
 
     if (dialogueVisible) {
+      fill(255);
       textSize(fontSize); // Set the font size
-      text(dialogueText, 300, 300);
+      textAlign(CENTER, CENTER); // Center the text
+      text(dialogueText, canvasWidth / 2, canvasHeigth / 2);
     }
 
-    if (hungerUpdate <= 0 || hygieneUpdate <= 0 || socialUpdate <= 0) {
+    if (hungerUpdate <= 0 || sleepUpdate <= 0 || socialUpdate <= 0) {
       gameOver = true;
     }
   } else {
-    // Display the "Game Over" message when the game is over
     fill(255);
     textSize(40);
     text("Game Over", 200, 300);
@@ -148,76 +165,35 @@ function draw() {
   }
 }
 
-function updateConstructions() {
-  const constructionsElement = document.getElementById("constructions");
-  numberOfConstructions += 1;
-  constructionsElement.innerHTML = `${numberOfConstructions}`;
-}
-
 setInterval(function () {
-  //console.log("Este mensaje se repetirá cada 10 segundo.");
   hungerUpdate -= 10;
   const hunger = document.getElementById("hunger");
   hunger.innerHTML = `${hungerUpdate}`;
-  hygieneUpdate -= 10;
-  const hygiene = document.getElementById("hygiene");
-  hygiene.innerHTML = `${hygieneUpdate}`;
+  sleepUpdate -= 10;
+  const sleep = document.getElementById("sleep");
+  sleep.innerHTML = `${sleepUpdate}`;
   socialUpdate -= 10;
   const social = document.getElementById("social");
   social.innerHTML = `${socialUpdate}`;
 }, 10000);
 
-function mouseMoved() {
-  // Check if the mouse is inside the image's boundaries
-  if (
-    mouseX >= merchant.x &&
-    mouseX <= merchant.x + merchantImg.width &&
-    mouseY >= merchant.y &&
-    mouseY <= merchant.y + merchantImg.height
-  ) {
-    // The mouse was clicked on the image
-    // You can add your code here to handle the image click event
-    //console.log("Image clicked!");
-    //const dialogue = document.getElementById("dialogueMerchant");
-    //dialogue.innerHTML = "Hola, Milburn, ve al puerto a pescar";
-    dialogueText = "Hola, Milburn, deberías ir al puerto a pescar";
-    dialogueVisible = true;
-  } else if (
-    mouseX >= boat.x &&
-    mouseX <= boat.x + boatImg.width &&
-    mouseY >= boat.y &&
-    mouseY <= boat.y + boatImg.height
-  ) {
-    // The mouse was clicked on the image
-    // You can add your code here to handle the image click event
-    //console.log("Image clicked!");
-    dialogueText = "Haz clic en el barco para recoger la pesca";
-    dialogueVisible = true;
-  } else {
-    dialogueVisible = false;
-  }
-}
-
-//¿Cómo recuperar hunger, hygiene y social, al hacer clic en elementos?
-
-function mousePressed() {
-  if (
-    mouseX >= boat.x &&
-    mouseX <= boat.x + boatImg.width &&
-    mouseY >= boat.y &&
-    mouseY <= boat.y + boatImg.height
-  ) {
-    //console.log("Pesca");
-    hungerUpdate += 100; //Al hacer clic, gano 100 puntos en vida/alimento
-    hunger.innerHTML = `${hungerUpdate}`;
-  }
-}
-
 function startNewGame() {
+  firstPlayer.x = 50;
+  firstPlayer.y = 50;
+  background.x = 0;
+  background.y = 0;
+  merchant.x = 50;
+  merchant.y = 400;
+  boat.x = 400;
+  boat.y = 800;
   hungerUpdate = 100;
-  hygieneUpdate = 100;
+  hunger.innerHTML = `${hungerUpdate}`;
+  sleepUpdate = 100;
+  sleep.innerHTML = `${sleepUpdate}`;
   socialUpdate = 100;
+  social.innerHTML = `${socialUpdate}`;
   gameOver = false;
   restartButton.hide();
   clear();
+  buildingsAdded = [];
 }
