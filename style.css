@@ -1,7 +1,6 @@
 #main-console {
   display: flex;
   flex-direction: row;
-  gap: 10px;
   justify-content: space-around;
   width: 1400px;
   font-size: 14px;
