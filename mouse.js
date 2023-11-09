@@ -47,6 +47,14 @@ function mouseMoved() {
   ) {
     dialogueText = "Haz clic para sacar dinero";
     dialogueVisible = true;
+  } else if (
+    mouseX >= people.x &&
+    mouseX <= people.x + peopleImg.width &&
+    mouseY >= people.y &&
+    mouseY <= people.y + peopleImg.height
+  ) {
+    dialogueText = "Haz clic para sociabilizar";
+    dialogueVisible = true;
   } else {
     dialogueVisible = false;
   }
@@ -69,6 +77,7 @@ function mousePressed() {
   ) {
     hungerUpdate += 100;
     hunger.innerHTML = `${hungerUpdate}`;
+    document.getElementById("hungerBox").style.backgroundColor = "green";
   } else if (
     mouseX >= myHouse.x &&
     mouseX <= myHouse.x + ownHouseImg.width &&
@@ -77,6 +86,7 @@ function mousePressed() {
   ) {
     sleepUpdate += 100;
     sleep.innerHTML = `${sleepUpdate}`;
+    document.getElementById("sleepBox").style.backgroundColor = "green";
   } else if (
     mouseX >= bank.x &&
     mouseX <= bank.x + bankImg.width &&
@@ -86,5 +96,15 @@ function mousePressed() {
   ) {
     moneyUpdate += 1000;
     money.innerHTML = `${moneyUpdate}`;
+    document.getElementById("moneyBox").style.backgroundColor = "green";
+  } else if (
+    mouseX >= people.x &&
+    mouseX <= people.x + peopleImg.width &&
+    mouseY >= people.y &&
+    mouseY <= people.y + peopleImg.height
+  ) {
+    socialUpdate += 100;
+    social.innerHTML = `${socialUpdate}`;
+    document.getElementById("socialBox").style.backgroundColor = "green";
   }
 }

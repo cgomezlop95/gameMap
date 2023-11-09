@@ -28,12 +28,14 @@ function preload() {
   boat2Img = loadImage("./imgs/boat2-200.png");
   ownHouseImg = loadImage("./imgs/myHouse.png");
   bankImg = loadImage("./imgs/bank150.png");
+  peopleImg = loadImage("./imgs/peopleOriginal100.png");
 }
 
 function setup() {
   firstPlayer = new Player(50, 50, playerImg);
   merchant = new Merchant(50, 400, merchantImg);
   monk = new Merchant(1100, 600, monkImg);
+  people = new Merchant(1100, 200, peopleImg);
   boat = new Boat(400, 800, boatImg);
   boat2 = new Boat(800, 700, boat2Img);
   market = new Market(600, 350, marketImg);
@@ -46,7 +48,7 @@ function setup() {
   canvas = createCanvas(canvasWidth, canvasHeigth);
   canvas.parent(gameContainer);
   restartButton = createButton("Restart");
-  restartButton.position(width / 2 - 50, height / 2);
+  restartButton.position(canvasWidth / 2, canvasHeigth / 2);
   restartButton.hide();
   restartButton.mousePressed(startNewGame);
 }
@@ -58,6 +60,7 @@ function draw() {
     firstPlayer.draw();
     merchant.draw();
     monk.draw();
+    people.draw();
     boat.draw();
     boat2.draw();
     market.draw();
@@ -83,6 +86,7 @@ function draw() {
         monastery.x -= 5;
         myHouse.x -= 5;
         bank.x -= 5;
+        people.x -= 5;
         for (let i = 0; i < buildingsAdded.length; i++) {
           buildingsAdded[i].x -= 5;
         }
@@ -101,6 +105,7 @@ function draw() {
         monastery.x += 5;
         myHouse.x += 5;
         bank.x += 5;
+        people.x += 5;
         for (let i = 0; i < buildingsAdded.length; i++) {
           buildingsAdded[i].x += 5;
         }
@@ -122,6 +127,7 @@ function draw() {
         monastery.y -= 5;
         myHouse.y -= 5;
         bank.y -= 5;
+        people.y -= 5;
         for (let i = 0; i < buildingsAdded.length; i++) {
           buildingsAdded[i].y -= 5;
         }
@@ -134,6 +140,7 @@ function draw() {
         background.y += 5;
         merchant.y += 5;
         monk.y += 5;
+        people.y += 5;
         boat.y += 5;
         boat2.y += 5;
         market.y += 5;
@@ -157,10 +164,15 @@ function draw() {
     if (hungerUpdate <= 0 || sleepUpdate <= 0 || socialUpdate <= 0) {
       gameOver = true;
     }
+
+    if (hungerUpdate === 30 || sleepUpdate === 30 || socialUpdate === 30) {
+      dialogueText = "Ten cuidado con tus niveles de las necesidades básicas";
+      dialogueVisible = true;
+    }
   } else {
     fill(255);
     textSize(40);
-    text("Game Over", 200, 300);
+    text("Game Over", canvasWidth / 2, canvasHeigth / 2);
     restartButton.show();
   }
 }
@@ -175,6 +187,9 @@ setInterval(function () {
   socialUpdate -= 10;
   const social = document.getElementById("social");
   social.innerHTML = `${socialUpdate}`;
+  document.getElementById("sleepBox").style.backgroundColor = "white";
+  document.getElementById("hungerBox").style.backgroundColor = "white";
+  document.getElementById("socialBox").style.backgroundColor = "white";
 }, 10000);
 
 function startNewGame() {
