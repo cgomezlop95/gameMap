@@ -42,7 +42,7 @@ function setup() {
   monastery = new Monastery(1200, 600, monasteryImg);
   myHouse = new ownHouse(420, 140, ownHouseImg);
   bank = new Bank(910, 0, bankImg);
-  background = new backgroundImage(0, 0, backgroundImg);
+  myBackground = new backgroundImage(0, 0, backgroundImg);
   myInvisibleRectangle = new invisibleRectangle(
     0,
     800,
@@ -63,7 +63,7 @@ function setup() {
 }
 
 function draw() {
-  background.draw();
+  myBackground.draw();
   myInvisibleRectangle.draw();
   if (!gameOver) {
     firstPlayer.update();
@@ -84,10 +84,10 @@ function draw() {
     if (firstPlayer.x >= canvasWidth - 200) {
       firstPlayer.x = canvasWidth - 200;
       if (
-        background.x >= canvasWidth - backgroundImg.width + 4 &&
+        myBackground.x >= canvasWidth - backgroundImg.width + 4 &&
         keyIsDown(RIGHT_ARROW)
       ) {
-        background.x -= 5;
+        myBackground.x -= 5;
         merchant.x -= 5;
         monk.x -= 5;
         boat.x -= 5;
@@ -106,8 +106,8 @@ function draw() {
 
     if (firstPlayer.x < 10) {
       firstPlayer.x = 10;
-      if (background.x < 0 && keyIsDown(LEFT_ARROW)) {
-        background.x += 5;
+      if (myBackground.x < 0 && keyIsDown(LEFT_ARROW)) {
+        myBackground.x += 5;
         merchant.x += 5;
         monk.x += 5;
         boat.x += 5;
@@ -127,10 +127,10 @@ function draw() {
     if (firstPlayer.y >= canvasHeigth - 200) {
       firstPlayer.y = canvasHeigth - 200;
       if (
-        background.y >= canvasHeigth - backgroundImg.height &&
+        myBackground.y >= canvasHeigth - backgroundImg.height &&
         keyIsDown(DOWN_ARROW)
       ) {
-        background.y -= 5;
+        myBackground.y -= 5;
         merchant.y -= 5;
         monk.y -= 5;
         boat.y -= 5;
@@ -149,8 +149,8 @@ function draw() {
 
     if (firstPlayer.y < 10) {
       firstPlayer.y = 10;
-      if (background.y < 0 && keyIsDown(UP_ARROW)) {
-        background.y += 5;
+      if (myBackground.y < 0 && keyIsDown(UP_ARROW)) {
+        myBackground.y += 5;
         merchant.y += 5;
         monk.y += 5;
         people.y += 5;
@@ -226,7 +226,7 @@ setInterval(function () {
 function startNewGame() {
   const positions = [
     { object: firstPlayer, x: 50, y: 50 },
-    { object: background, x: 0, y: 0 },
+    { object: myBackground, x: 0, y: 0 },
     { object: merchant, x: 50, y: 400 },
     { object: boat, x: 400, y: 800 },
     { object: myInvisibleRectangle, x: 0, y: 800 },
