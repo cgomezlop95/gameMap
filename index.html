@@ -7,7 +7,31 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div id="canvas">
+    <div id="parentDiv">
+      <div id="canvas"></div>
+      <div class="dialog-console">
+        <p>Welcome, Milburn, these are the keys to build</p>
+        <ul>
+          <li>T - Tower</li>
+          <li>C - Castle</li>
+          <li>H - House</li>
+          <li>B - Bar</li>
+        </ul>
+        <p class="percentageBar" id="hungerBox">
+          Hunger: <b id="hunger">100</b>%
+        </p>
+        <p class="instruction">Go to the market or the boat to fish</p>
+        <p class="percentageBar" id="sleepBox">Sleep: <b id="sleep">100</b>%</p>
+        <p class="instruction">Go home if you need to sleep</p>
+        <p class="percentageBar" id="socialBox">
+          Social: <b id="social">100</b>%
+        </p>
+        <p class="instruction">
+          Talk to the neighbours if you need to socialize
+        </p>
+        <p class="percentageBar" id="moneyBox">Money: <b id="money">100</b>%</p>
+        <p class="instruction">Go to the bank if you need money</p>
+      </div>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
       <script src="sketch.js"></script>
       <script src="player.js"></script>
@@ -25,27 +49,6 @@
       <script src="classes/bank.js"></script>
       <script src="mouse.js"></script>
       <script src="invisibleRectangle.js"></script>
-    </div>
-    <div class="dialog-console">
-      <p>Welcome, Milburn, these are the keys to build</p>
-      <ul>
-        <li>T - Tower</li>
-        <li>C - Castle</li>
-        <li>H - House</li>
-        <li>B - Bar</li>
-      </ul>
-      <p class="percentageBar" id="hungerBox">
-        Hunger: <b id="hunger">100</b>%
-      </p>
-      <p class="instruction">Go to the market or the boat to fish</p>
-      <p class="percentageBar" id="sleepBox">Sleep: <b id="sleep">100</b>%</p>
-      <p class="instruction">Go home if you need to sleep</p>
-      <p class="percentageBar" id="socialBox">
-        Social: <b id="social">100</b>%
-      </p>
-      <p class="instruction">Talk to the neighbours if you need to socialize</p>
-      <p class="percentageBar" id="moneyBox">Money: <b id="money">100</b>%</p>
-      <p class="instruction">Go to the bank if you need money</p>
     </div>
   </body>
 </html>

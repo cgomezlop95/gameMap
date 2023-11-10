@@ -1,13 +1,14 @@
 body {
   margin: 0px;
 }
+
+#parentDiv {
+  display: flex;
+  flex-direction: row;
+}
+
 .dialog-console {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 330px;
-  height: 100%;
-  background-color: #f0f0f0;
+  border: 3px black solid;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   font-size: 18px;
@@ -20,4 +21,5 @@ body {
 
 .instruction {
   padding-left: 20px;
+  font-style: italic;
 }
