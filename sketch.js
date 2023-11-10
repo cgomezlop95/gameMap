@@ -14,12 +14,12 @@ let restartButton;
 
 function preload() {
   backgroundImg = loadImage("./imgs/newTest-1600-1105.jpg");
-  playerImg = loadImage("./imgs/playerHeigth150.png");
+  baseImg = loadImage("./imgs/playerHeigth150.png");
+  seaImg = loadImage("./imgs/playerHeigth150.png"); //
   towerImg = loadImage("./imgs/tower200.png");
   houseImg = loadImage("./imgs/houseHeigth200.png");
   castleImg = loadImage("./imgs/medievalCastlecut.png");
   tavernImg = loadImage("./imgs/tavernHeigth180.png");
-  moneyImg = loadImage("./imgs/money.png");
   merchantImg = loadImage("./imgs/merchantHeigth150.png");
   monkImg = loadImage("./imgs/monk130.png");
   boatImg = loadImage("./imgs/boatHeigth200.png");
@@ -32,7 +32,7 @@ function preload() {
 }
 
 function setup() {
-  firstPlayer = new Player(50, 50, playerImg);
+  firstPlayer = new Player(50, 50, baseImg, seaImg);
   merchant = new Merchant(50, 400, merchantImg);
   monk = new Merchant(1100, 600, monkImg);
   people = new Merchant(1100, 200, peopleImg);
@@ -43,7 +43,12 @@ function setup() {
   myHouse = new ownHouse(420, 140, ownHouseImg);
   bank = new Bank(910, 0, bankImg);
   background = new backgroundImage(0, 0, backgroundImg);
-  moneyIcon = new Money(700, 400, moneyImg);
+  myInvisibleRectangle = new invisibleRectangle(
+    0,
+    800,
+    backgroundImg.width - 450,
+    320
+  );
   const gameContainer = select("#canvas");
   canvas = createCanvas(canvasWidth, canvasHeigth);
   canvas.parent(gameContainer);
@@ -59,6 +64,7 @@ function setup() {
 
 function draw() {
   background.draw();
+  myInvisibleRectangle.draw();
   if (!gameOver) {
     firstPlayer.update();
     firstPlayer.draw();
@@ -91,6 +97,7 @@ function draw() {
         myHouse.x -= 5;
         bank.x -= 5;
         people.x -= 5;
+        myInvisibleRectangle.x -= 5;
         for (let i = 0; i < buildingsAdded.length; i++) {
           buildingsAdded[i].x -= 5;
         }
@@ -110,6 +117,7 @@ function draw() {
         myHouse.x += 5;
         bank.x += 5;
         people.x += 5;
+        myInvisibleRectangle.x += 5;
         for (let i = 0; i < buildingsAdded.length; i++) {
           buildingsAdded[i].x += 5;
         }
@@ -132,6 +140,7 @@ function draw() {
         myHouse.y -= 5;
         bank.y -= 5;
         people.y -= 5;
+        myInvisibleRectangle.y -= 5;
         for (let i = 0; i < buildingsAdded.length; i++) {
           buildingsAdded[i].y -= 5;
         }
@@ -150,6 +159,7 @@ function draw() {
         market.y += 5;
         monastery.y += 5;
         myHouse.y += 5;
+        myInvisibleRectangle.y += 5;
         bank.y += 5;
         for (let i = 0; i < buildingsAdded.length; i++) {
           buildingsAdded[i].y += 5;

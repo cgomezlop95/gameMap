@@ -4,10 +4,12 @@ const letterC = 67;
 const letterB = 66;
 
 class Player {
-  constructor(x, y, playerImg) {
+  constructor(x, y, baseImg, seaImg) {
     this.x = x;
     this.y = y;
-    this.playerImg = playerImg;
+    this.baseImg = baseImg;
+    this.seaImg = seaImg;
+    this.playerImg = this.baseImg;
   }
 
   update() {
