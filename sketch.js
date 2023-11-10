@@ -168,6 +168,13 @@ function draw() {
     }
     //MOVIMIENTO POR LOS 4 LADOS//
 
+    //
+    if (myInvisibleRectangle.isColliding(firstPlayer)) {
+      console.log("collision");
+    }
+
+    //
+
     if (dialogueVisible) {
       fill(255);
       textSize(fontSize); // Set the font size
