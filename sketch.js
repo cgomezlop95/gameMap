@@ -16,8 +16,8 @@ function preload() {
   backgroundImg = loadImage("./imgs/newTest-1600-1105.jpg");
   baseImg = loadImage("./imgs/playerHeigth150.png");
   towerImg = loadImage("./imgs/tower200.png");
-  houseImg = loadImage("./imgs/houseHeigth200.png");
-  castleImg = loadImage("./imgs/medievalCastlecut.png");
+  houseImg = loadImage("./imgs/randomHouseOriginal.png");
+  castleImg = loadImage("./imgs/empiresCastle.png");
   tavernImg = loadImage("./imgs/tavernHeigth180.png");
   merchantImg = loadImage("./imgs/merchantHeigth150.png");
   monkImg = loadImage("./imgs/monk130.png");
@@ -67,16 +67,19 @@ function draw() {
   myInvisibleRectangle.draw();
   if (!gameOver) {
     firstPlayer.update();
-    firstPlayer.draw();
-    merchant.draw();
-    monk.draw();
-    people.draw();
-    boat.draw();
-    boat2.draw();
-    market.draw();
-    monastery.draw();
-    myHouse.draw();
-    bank.draw();
+    const objectsToDraw = [
+      firstPlayer,
+      merchant,
+      monk,
+      people,
+      boat,
+      boat2,
+      market,
+      monastery,
+      myHouse,
+      bank,
+    ];
+    objectsToDraw.forEach((object) => object.draw());
     for (let i = 0; i < buildingsAdded.length; i++) {
       buildingsAdded[i].draw();
     }
