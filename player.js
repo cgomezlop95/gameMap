@@ -52,7 +52,6 @@ class Player {
 }
 
 function buildTower() {
-  // Check if there's already a tower at the same position
   for (let i = 0; i < buildingsAdded.length; i++) {
     if (
       buildingsAdded[i].x === firstPlayer.x - 110 &&
@@ -62,11 +61,12 @@ function buildTower() {
       return;
     }
   }
-  // Build a new tower
-  const newTower = new Tower(firstPlayer.x - 110, firstPlayer.y, towerImg);
-  buildingsAdded.push(newTower);
-  // Reduce the money spent on construction
-  updateConstructions();
+
+  if (!myInvisibleRectangle.isColliding(firstPlayer)) {
+    const newTower = new Tower(firstPlayer.x - 110, firstPlayer.y, towerImg);
+    buildingsAdded.push(newTower);
+    updateConstructions();
+  }
 }
 
 function buildHouse() {
@@ -79,9 +79,12 @@ function buildHouse() {
       return;
     }
   }
-  const newHouse = new House(firstPlayer.x - 110, firstPlayer.y, houseImg);
-  buildingsAdded.push(newHouse);
-  updateConstructions();
+
+  if (!myInvisibleRectangle.isColliding(firstPlayer)) {
+    const newHouse = new House(firstPlayer.x - 110, firstPlayer.y, houseImg);
+    buildingsAdded.push(newHouse);
+    updateConstructions();
+  }
 }
 
 function buildCastle() {
@@ -94,9 +97,12 @@ function buildCastle() {
       return;
     }
   }
-  const newCastle = new Castle(firstPlayer.x - 110, firstPlayer.y, castleImg);
-  buildingsAdded.push(newCastle);
-  updateConstructions();
+
+  if (!myInvisibleRectangle.isColliding(firstPlayer)) {
+    const newCastle = new Castle(firstPlayer.x - 110, firstPlayer.y, castleImg);
+    buildingsAdded.push(newCastle);
+    updateConstructions();
+  }
 }
 
 function buildBar() {
@@ -109,9 +115,11 @@ function buildBar() {
       return;
     }
   }
-  const newBar = new Bar(firstPlayer.x - 220, firstPlayer.y, tavernImg);
-  buildingsAdded.push(newBar);
-  updateConstructions();
+  if (!myInvisibleRectangle.isColliding(firstPlayer)) {
+    const newBar = new Bar(firstPlayer.x - 220, firstPlayer.y, tavernImg);
+    buildingsAdded.push(newBar);
+    updateConstructions();
+  }
 }
 
 function updateConstructions() {

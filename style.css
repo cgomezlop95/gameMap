@@ -10,9 +10,14 @@ body {
   background-color: #f0f0f0;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-size: 18px;
+  font-family: sans-serif;
 }
 
-p {
+.percentageBar {
   padding: 10px;
-  border: 1px solid #ccc;
+}
+
+.instruction {
+  padding-left: 20px;
 }

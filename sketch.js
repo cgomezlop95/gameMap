@@ -15,7 +15,6 @@ let restartButton;
 function preload() {
   backgroundImg = loadImage("./imgs/newTest-1600-1105.jpg");
   baseImg = loadImage("./imgs/playerHeigth150.png");
-  seaImg = loadImage("./imgs/playerHeigth150.png"); //
   towerImg = loadImage("./imgs/tower200.png");
   houseImg = loadImage("./imgs/houseHeigth200.png");
   castleImg = loadImage("./imgs/medievalCastlecut.png");
@@ -29,6 +28,7 @@ function preload() {
   ownHouseImg = loadImage("./imgs/myHouse.png");
   bankImg = loadImage("./imgs/bank150.png");
   peopleImg = loadImage("./imgs/peopleOriginal100.png");
+  seaImg = loadImage("./imgs/seaImg200.png");
 }
 
 function setup() {
@@ -46,7 +46,7 @@ function setup() {
   myInvisibleRectangle = new invisibleRectangle(
     0,
     800,
-    backgroundImg.width - 450,
+    backgroundImg.width,
     320
   );
   const gameContainer = select("#canvas");
@@ -166,15 +166,15 @@ function draw() {
         }
       }
     }
-    //MOVIMIENTO POR LOS 4 LADOS//
 
-    //
+    //Check the collision of the player with the sea (invisible rectangle)
     if (myInvisibleRectangle.isColliding(firstPlayer)) {
-      console.log("collision");
+      firstPlayer.playerImg = firstPlayer.seaImg;
+    } else {
+      firstPlayer.playerImg = firstPlayer.baseImg;
     }
 
-    //
-
+    //Show the relevant text
     if (dialogueVisible) {
       fill(255);
       textSize(fontSize); // Set the font size
@@ -182,6 +182,7 @@ function draw() {
       text(dialogueText, canvasWidth / 2, canvasHeigth / 2);
     }
 
+    //Game over when one of the parameters is 0 %
     if (
       hungerUpdate <= 0 ||
       sleepUpdate <= 0 ||
@@ -220,30 +221,27 @@ setInterval(function () {
     social.innerHTML = `${socialUpdate}`;
     document.getElementById("socialBox").style.width = `${socialUpdate}%`;
   }
-
-  if (
-    hungerUpdate < 40 &&
-    sleepUpdate < 40 &&
-    socialUpdate &&
-    40 &&
-    moneyUpdate < 40
-  ) {
-    document.getElementById("sleepBox").style.backgroundColor = "red";
-    document.getElementById("hungerBox").style.backgroundColor = "red";
-    document.getElementById("socialBox").style.backgroundColor = "red";
-    document.getElementById("moneyBox").style.backgroundColor = "red";
-  }
-}, 5000);
+}, 10000);
 
 function startNewGame() {
-  firstPlayer.x = 50;
-  firstPlayer.y = 50;
-  background.x = 0;
-  background.y = 0;
-  merchant.x = 50;
-  merchant.y = 400;
-  boat.x = 400;
-  boat.y = 800;
+  const positions = [
+    { object: firstPlayer, x: 50, y: 50 },
+    { object: background, x: 0, y: 0 },
+    { object: merchant, x: 50, y: 400 },
+    { object: boat, x: 400, y: 800 },
+    { object: myInvisibleRectangle, x: 0, y: 800 },
+    { object: monk, x: 1100, y: 600 },
+    { object: boat2, x: 800, y: 700 },
+    { object: market, x: 600, y: 350 },
+    { object: monastery, x: 1200, y: 600 },
+    { object: bank, x: 910, y: 0 },
+    { object: people, x: 1100, y: 200 },
+    { object: myHouse, x: 420, y: 140 },
+  ];
+  positions.forEach(({ object, x, y }) => {
+    object.x = x;
+    object.y = y;
+  });
   hungerUpdate = 100;
   hunger.innerHTML = `${hungerUpdate}`;
   sleepUpdate = 100;
@@ -252,10 +250,6 @@ function startNewGame() {
   social.innerHTML = `${socialUpdate}`;
   moneyUpdate = 100;
   money.innerHTML = `${moneyUpdate}`;
-  document.getElementById("sleepBox").style.backgroundColor = "green";
-  document.getElementById("hungerBox").style.backgroundColor = "green";
-  document.getElementById("socialBox").style.backgroundColor = "green";
-  document.getElementById("moneyBox").style.backgroundColor = "green";
   document.getElementById("sleepBox").style.width = "100%";
   document.getElementById("hungerBox").style.width = "100%";
   document.getElementById("socialBox").style.width = "100%";

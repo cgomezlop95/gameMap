@@ -9,7 +9,7 @@ function mouseMoved() {
       mouseY >= monk.y &&
       mouseY <= monk.y + monkImg.height)
   ) {
-    dialogueText = "Hola, Milburn, deberías ir al puerto a pescar o al mercado";
+    dialogueText = "Go to the market or to the fishing boats for food";
     dialogueVisible = true;
   } else if (
     (mouseX >= boat.x &&
@@ -21,7 +21,7 @@ function mouseMoved() {
       mouseY >= boat2.y &&
       mouseY <= boat2.y + boat2Img.height)
   ) {
-    dialogueText = "Haz clic en el barco para recoger la pesca";
+    dialogueText = "Click on the boat for fishing";
     dialogueVisible = true;
   } else if (
     mouseX >= market.x &&
@@ -29,7 +29,7 @@ function mouseMoved() {
     mouseY >= market.y &&
     mouseY <= market.y + marketImg.height
   ) {
-    dialogueText = "Haz clic en el mercado para comprar alimentos";
+    dialogueText = "Click on the market to get your food";
     dialogueVisible = true;
   } else if (
     mouseX >= myHouse.x &&
@@ -37,7 +37,7 @@ function mouseMoved() {
     mouseY >= myHouse.y &&
     mouseY <= myHouse.y + ownHouseImg.height
   ) {
-    dialogueText = "Haz clic para ir a casa a dormir";
+    dialogueText = "Click to go home and sleep";
     dialogueVisible = true;
   } else if (
     mouseX >= bank.x &&
@@ -45,7 +45,7 @@ function mouseMoved() {
     mouseY >= bank.y &&
     mouseY <= bank.y + bankImg.height
   ) {
-    dialogueText = "Haz clic para sacar dinero";
+    dialogueText = "Click to withdraw some money";
     dialogueVisible = true;
   } else if (
     mouseX >= people.x &&
@@ -53,7 +53,7 @@ function mouseMoved() {
     mouseY >= people.y &&
     mouseY <= people.y + peopleImg.height
   ) {
-    dialogueText = "Haz clic para sociabilizar";
+    dialogueText = "Click to talk to the people";
     dialogueVisible = true;
   } else {
     dialogueVisible = false;

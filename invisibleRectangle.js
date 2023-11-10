@@ -17,8 +17,7 @@ class invisibleRectangle {
 
   draw() {
     noFill(); // Set the fill color to transparent
-    //stroke(0);       // Set the stroke color to black (you can change this if needed)
-    //strokeWeight(2);  // Set the stroke weight (thickness) if you want an outline
+    noStroke(); // Remove the border
     rect(this.x, this.y, this.w, this.h);
   }
 }
