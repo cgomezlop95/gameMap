@@ -4,7 +4,7 @@ let canvasHeigth = 715;
 let hungerUpdate = 100;
 let sleepUpdate = 100;
 let socialUpdate = 100;
-let moneyUpdate = 1000;
+let moneyUpdate = 100;
 let numberOfConstructions = 0;
 let dialogueText = "";
 let dialogueVisible = false;
@@ -48,9 +48,13 @@ function setup() {
   canvas = createCanvas(canvasWidth, canvasHeigth);
   canvas.parent(gameContainer);
   restartButton = createButton("Restart");
-  restartButton.position(canvasWidth / 2, canvasHeigth / 2);
+  restartButton.position(canvasWidth / 2, canvasHeigth / 2 + 50);
   restartButton.hide();
   restartButton.mousePressed(startNewGame);
+  document.getElementById("sleepBox").style.backgroundColor = "green";
+  document.getElementById("hungerBox").style.backgroundColor = "green";
+  document.getElementById("socialBox").style.backgroundColor = "green";
+  document.getElementById("moneyBox").style.backgroundColor = "green";
 }
 
 function draw() {
@@ -161,13 +165,13 @@ function draw() {
       text(dialogueText, canvasWidth / 2, canvasHeigth / 2);
     }
 
-    if (hungerUpdate <= 0 || sleepUpdate <= 0 || socialUpdate <= 0) {
+    if (
+      hungerUpdate <= 0 ||
+      sleepUpdate <= 0 ||
+      socialUpdate <= 0 ||
+      moneyUpdate <= 0
+    ) {
       gameOver = true;
-    }
-
-    if (hungerUpdate === 30 || sleepUpdate === 30 || socialUpdate === 30) {
-      dialogueText = "Ten cuidado con tus niveles de las necesidades básicas";
-      dialogueVisible = true;
     }
   } else {
     fill(255);
@@ -178,19 +182,41 @@ function draw() {
 }
 
 setInterval(function () {
-  hungerUpdate -= 10;
-  const hunger = document.getElementById("hunger");
-  hunger.innerHTML = `${hungerUpdate}`;
-  sleepUpdate -= 10;
-  const sleep = document.getElementById("sleep");
-  sleep.innerHTML = `${sleepUpdate}`;
-  socialUpdate -= 10;
-  const social = document.getElementById("social");
-  social.innerHTML = `${socialUpdate}`;
-  document.getElementById("sleepBox").style.backgroundColor = "white";
-  document.getElementById("hungerBox").style.backgroundColor = "white";
-  document.getElementById("socialBox").style.backgroundColor = "white";
-}, 10000);
+  if (
+    hungerUpdate > 0 &&
+    sleepUpdate > 0 &&
+    socialUpdate > 0 &&
+    moneyUpdate > 0
+  ) {
+    hungerUpdate -= 10;
+    const hunger = document.getElementById("hunger");
+    hunger.innerHTML = `${hungerUpdate}`;
+    document.getElementById("hungerBox").style.width = `${hungerUpdate}%`;
+
+    sleepUpdate -= 10;
+    const sleep = document.getElementById("sleep");
+    sleep.innerHTML = `${sleepUpdate}`;
+    document.getElementById("sleepBox").style.width = `${sleepUpdate}%`;
+
+    socialUpdate -= 10;
+    const social = document.getElementById("social");
+    social.innerHTML = `${socialUpdate}`;
+    document.getElementById("socialBox").style.width = `${socialUpdate}%`;
+  }
+
+  if (
+    hungerUpdate < 40 &&
+    sleepUpdate < 40 &&
+    socialUpdate &&
+    40 &&
+    moneyUpdate < 40
+  ) {
+    document.getElementById("sleepBox").style.backgroundColor = "red";
+    document.getElementById("hungerBox").style.backgroundColor = "red";
+    document.getElementById("socialBox").style.backgroundColor = "red";
+    document.getElementById("moneyBox").style.backgroundColor = "red";
+  }
+}, 5000);
 
 function startNewGame() {
   firstPlayer.x = 50;
@@ -207,6 +233,16 @@ function startNewGame() {
   sleep.innerHTML = `${sleepUpdate}`;
   socialUpdate = 100;
   social.innerHTML = `${socialUpdate}`;
+  moneyUpdate = 100;
+  money.innerHTML = `${moneyUpdate}`;
+  document.getElementById("sleepBox").style.backgroundColor = "green";
+  document.getElementById("hungerBox").style.backgroundColor = "green";
+  document.getElementById("socialBox").style.backgroundColor = "green";
+  document.getElementById("moneyBox").style.backgroundColor = "green";
+  document.getElementById("sleepBox").style.width = "100%";
+  document.getElementById("hungerBox").style.width = "100%";
+  document.getElementById("socialBox").style.width = "100%";
+  document.getElementById("moneyBox").style.width = "100%";
   gameOver = false;
   restartButton.hide();
   clear();

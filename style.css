@@ -12,16 +12,6 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#main-console {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 10px;
-  background-color: #f8f8f8;
-  color: #333;
-  width: 1100px;
-}
-
 p {
   padding: 10px;
   border: 1px solid #ccc;

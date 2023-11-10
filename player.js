@@ -113,7 +113,8 @@ function buildBar() {
 }
 
 function updateConstructions() {
-  moneyUpdate -= 100;
+  moneyUpdate -= 10;
   const money = document.getElementById("money");
   money.innerHTML = `${moneyUpdate}`;
+  document.getElementById("moneyBox").style.width = `${moneyUpdate}%`;
 }
