@@ -1,6 +1,6 @@
 let buildingsAdded = [];
 let canvasWidth = 1100;
-let canvasHeigth = 715;
+let canvasHeight = 715;
 let hungerUpdate = 100;
 let sleepUpdate = 100;
 let socialUpdate = 100;
@@ -50,10 +50,10 @@ function setup() {
     320
   );
   const gameContainer = select("#canvas");
-  canvas = createCanvas(canvasWidth, canvasHeigth);
+  canvas = createCanvas(canvasWidth, canvasHeight);
   canvas.parent(gameContainer);
   restartButton = createButton("Restart");
-  restartButton.position(canvasWidth / 2, canvasHeigth / 2 + 50);
+  restartButton.position(canvasWidth / 2, canvasHeight / 2 + 50);
   restartButton.hide();
   restartButton.mousePressed(startNewGame);
   document.getElementById("sleepBox").style.backgroundColor = "green";
@@ -127,10 +127,10 @@ function draw() {
       }
     }
 
-    if (firstPlayer.y >= canvasHeigth - 200) {
-      firstPlayer.y = canvasHeigth - 200;
+    if (firstPlayer.y >= canvasHeight - 200) {
+      firstPlayer.y = canvasHeight - 200;
       if (
-        myBackground.y >= canvasHeigth - backgroundImg.height &&
+        myBackground.y >= canvasHeight - backgroundImg.height &&
         keyIsDown(DOWN_ARROW)
       ) {
         myBackground.y -= 5;
@@ -182,7 +182,7 @@ function draw() {
       fill(255);
       textSize(fontSize); // Set the font size
       textAlign(CENTER, CENTER); // Center the text
-      text(dialogueText, canvasWidth / 2, canvasHeigth / 2);
+      text(dialogueText, canvasWidth / 2, canvasHeight / 2);
     }
 
     //Game over when one of the parameters is 0 %
@@ -197,7 +197,7 @@ function draw() {
   } else {
     fill(255);
     textSize(40);
-    text("Game Over", canvasWidth / 2, canvasHeigth / 2);
+    text("Game Over", canvasWidth / 2, canvasHeight / 2);
     restartButton.show();
   }
 }
